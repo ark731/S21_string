@@ -93,9 +93,6 @@ char *s21_strstr(const char *haystack, const char *needle);
 /* | Разбивает строку str на ряд токенов, разделенных delim. | */
 char *s21_strtok(char *str, const char *delim);
 
-/* | Считывает форматированный ввод из строки. | */
-int s21_sscanf(const char *str, const char *format, ...);
-
 /* | Отправляет форматированный вывод в строку, на которую указывает str. | */
 int s21_sprintf(char *str, const char *format, ...);
 
@@ -116,6 +113,5 @@ void *s21_insert(const char *src, const char *str, s21_size_t start_index);
  * вхождения набора заданных символов (trim_chars) из данной строки (src). В
  * случае какой-либо ошибки следует вернуть значение NULL | */
 void *s21_trim(const char *src, const char *trim_chars);
-char *delete_symbols_from_src(const char *src, const char *trim_chars);
 
 #endif

@@ -2,6 +2,8 @@
 
 #include "s21_string.h"
 
+char *delete_symbols_from_src(const char *src, const char *trim_chars);
+
 void *s21_trim(const char *src, const char *trim_chars) {
   char *result_string = NULL;
   if (src != NULL) {
