@@ -1,0 +1,43 @@
+#suite s21_strstr_test
+
+#test s21_strstr_test1
+char *string = "What you are referring to as Linux is in fact GNU/Linux";
+char *substring = "GNU";
+char *expected = s21_strstr(string, substring);
+char *result = strstr(string, substring);
+ck_assert(expected == result);
+
+#test s21_strstr_test2
+char *string = "What you are referring to as Linux is in fact GNU/Linux ";
+char *substring = "Linux";
+char *expected = s21_strstr(string, substring);
+char *result = strstr(string, substring);
+ck_assert(expected == result);
+
+#test s21_strstr_test3
+char *string = "What you are referring to as Linux is in fact GNU/Linux ";
+char *substring = "What";
+char *expected = s21_strstr(string, substring);
+char *result = strstr(string, substring);
+ck_assert(expected == result);
+
+#test s21_strstr_test4
+char *string = "What you are referring to as Linux is in fact GNU/Linux ";
+char *substring = "";
+char *expected = s21_strstr(string, substring);
+char *result = strstr(string, substring);
+ck_assert(expected == result);
+
+#test s21_strstr_test5
+char *string = "What you are referring to as Linux is in fact GNU/Linux ";
+char *substring = "Windows";
+char *expected = s21_strstr(string, substring);
+char *result = strstr(string, substring);
+ck_assert(expected == result);
+
+#test s21_strstr_test6
+const char *string = "";
+const char *substring = "Astra";
+const char *result = s21_strstr(string, substring);
+const char *expected = strstr(string, substring);
+ck_assert_pstr_eq(result, expected);

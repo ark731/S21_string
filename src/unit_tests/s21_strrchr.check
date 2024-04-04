@@ -1,0 +1,26 @@
+#suite s21_strrchr_test
+
+#test s21_strrchr_test1
+const char *result = s21_strrchr("Hello world", 'o');
+const char *expected = strrchr("Hello world", 'o');
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strrchr_test2
+const char *result = s21_strrchr("Hello, world!", 'z');
+const char *expected = strrchr("Hello, world!", 'z');
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strrchr_test3
+const char *result = s21_strrchr("", 'a');
+const char *expected = strrchr("", 'a');
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strrchr_test4
+const char *result = s21_strrchr("Hello, world!", 'H');
+const char *expected = strrchr("Hello, world!", 'H');
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strrchr_test5
+const char *result = s21_strrchr("Hello, world!Hello, world!", '!');
+const char *expected = strrchr("Hello, world!Hello, world!", '!');
+ck_assert_pstr_eq(result, expected);

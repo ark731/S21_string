@@ -1,0 +1,71 @@
+#suite s21_memcmp_test
+
+#test s21_memcmp_test1
+unsigned char src[15] = "1234567890";
+unsigned char dst[15] = "1234567890";
+int result = s21_memcmp(src, dst, 10);
+int expected = memcmp(src, dst, 10);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_memcmp_test2
+unsigned char src[15] = "1234567890";
+unsigned char dst[15] = "7234567890";
+int result = s21_memcmp(src, dst, 10);
+int expected = memcmp(src, dst, 10);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_memcmp_test3
+const char *str1 = "Hello, world!Hello, world!";
+const char *str2 = "Hello, world!Hello, world!";
+s21_size_t n = 10;
+int result = s21_memcmp(str1, str2, n);
+int expected = memcmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_memcmp_test4
+const char *str1 = "Hello, world!";
+const char *str2 = "Hello, world!";
+s21_size_t n = 4;
+int result = s21_memcmp(str1, str2, n);
+int expected = memcmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_memcmp_test5
+const char *str1 = "test";
+const char *str2 = "ttest";
+s21_size_t n = 0;
+int result = s21_memcmp(str1, str2, n);
+int expected = memcmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_memcmp_test6
+const char *str1 = "";
+const char *str2 = "";
+s21_size_t n = 0;
+int result = s21_memcmp(str1, str2, n);
+int expected = memcmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_memcmp_test7
+const char *str1 = "";
+const char *str2 = "";
+s21_size_t n = 1;
+int result = s21_memcmp(str1, str2, n);
+int expected = memcmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_memcmp_test8
+const char *str1 = "Hello";
+const char *str2 = "HelIo";
+s21_size_t n = 5;
+int result = s21_memcmp(str1, str2, n);
+int expected = memcmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));

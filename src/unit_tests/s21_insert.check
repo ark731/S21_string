@@ -1,0 +1,47 @@
+#suite s21_insert_test
+
+#test s21_insert_test1
+const char *source = "Hello,!";
+const char *insertion = " How are you?";
+char *result = s21_insert(source, insertion, 6);
+ck_assert_str_eq(result, "Hello, How are you?!");
+free(result);
+
+#test s21_insert_test2
+const char *source = "abcdef";
+const char *insertion = "123";
+char *result = s21_insert(source, insertion, 0);
+ck_assert_str_eq(result, "123abcdef");
+free(result);
+
+#test s21_insert_test3
+const char *source = "abcdef";
+const char *insertion = "123";
+char *result = s21_insert(source, insertion, strlen(source));
+ck_assert_str_eq(result, "abcdef123");
+free(result);
+
+#test s21_insert_test4
+const char *source = "Hello!";
+const char *insertion = "";
+char *result = s21_insert(source, insertion, 5);
+ck_assert_str_eq(result, "Hello!");
+free(result);
+
+#test s21_insert_test5
+const char *source = "";
+const char *insertion = "123";
+char *result = s21_insert(source, insertion, 0);
+ck_assert_str_eq(result, "123");
+free(result);
+
+#test s21_insert_test6
+const char *insertion = "123";
+char *result = s21_insert(NULL, insertion, 0);
+ck_assert_pstr_eq(result, NULL);
+
+#test s21_insert_test7
+const char *source = "Hello!";
+char *result = s21_insert(source, NULL, 5);
+ck_assert_str_eq(result, "Hello!");
+free(result);

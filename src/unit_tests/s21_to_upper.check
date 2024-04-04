@@ -1,0 +1,89 @@
+#suite s21_to_upper_test
+
+#test s21_to_upper_test1
+char str[23] = "hello, world!";
+char expected[23] = "HELLO, WORLD!";
+char *dest1 = s21_to_upper(str);
+ck_assert_str_eq(dest1, expected);
+free(dest1);
+
+#test s21_to_upper_test2
+const char *input = "Hello, World!";
+char *result = s21_to_upper(input);
+size_t len = strlen(input) + 1;
+char *expected = malloc(len);
+strcpy(expected, input);
+char *ptr = expected;
+while (*ptr) {
+  *ptr = toupper(*ptr);
+  ptr++;
+}
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_upper_test3
+const char *input2 = "";
+char *result = s21_to_upper(input2);
+size_t len = strlen(input2) + 1;
+char *expected = malloc(len);
+strcpy(expected, input2);
+
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_upper_test4
+const char *input3 = "HELLO, WORLD!";
+char *result = s21_to_upper(input3);
+size_t len = strlen(input3) + 1;
+char *expected = malloc(len);
+strcpy(expected, input3);
+char *ptr = expected;
+
+while (*ptr) {
+  *ptr = toupper(*ptr);
+  ptr++;
+}
+
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_upper_test5
+const char *input4 = "hello, world!";
+char *result = s21_to_upper(input4);
+size_t len = strlen(input4) + 1;
+char *expected = malloc(len);
+strcpy(expected, input4);
+char *ptr = expected;
+
+while (*ptr) {
+  *ptr = toupper(*ptr);
+  ptr++;
+}
+
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_upper_test6
+const char *input5 = "HeLlO, WoRlD!";
+char *result = s21_to_upper(input5);
+size_t len = strlen(input5) + 1;
+char *expected = malloc(len);
+strcpy(expected, input5);
+char *ptr = expected;
+
+while (*ptr) {
+  *ptr = toupper(*ptr);
+  ptr++;
+}
+
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_upper_test7
+char *result = s21_to_upper(NULL);
+ck_assert_pstr_eq(result, NULL);

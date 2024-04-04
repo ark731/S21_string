@@ -1,0 +1,78 @@
+#suite s21_strtok_test
+
+#test s21_strtok_test1
+char str1[] = "This is a test";
+char str2[] = "This is a test";
+char *result = s21_strtok(str1, " ");
+char *expected = strtok(str2, " ");
+ck_assert_pstr_eq(result, expected);
+while (result != NULL && expected != NULL) {
+  result = s21_strtok(NULL, " ");
+  expected = strtok(NULL, " ");
+  ck_assert_pstr_eq(result, expected);
+}
+
+#test s21_strtok_test2
+char str1[] = "This, is, a, test";
+char str2[] = "This, is, a, test";
+const char *delim = ",";
+char *result = s21_strtok(str1, delim);
+char *expected = strtok(str2, delim);
+ck_assert_pstr_eq(result, expected);
+while (result != NULL && expected != NULL) {
+  result = s21_strtok(NULL, delim);
+  expected = strtok(NULL, delim);
+  ck_assert_pstr_eq(result, expected);
+}
+
+#test s21_strtok_test3
+char str1[] = "";
+char str2[] = "";
+const char *delim = ",";
+char *result = s21_strtok(str1, delim);
+char *expected = strtok(str2, delim);
+ck_assert_pstr_eq(result, expected);
+while (result != NULL && expected != NULL) {
+  result = s21_strtok(NULL, delim);
+  expected = strtok(NULL, delim);
+  ck_assert_pstr_eq(result, expected);
+}
+
+#test s21_strtok_test4
+char str1[] = "This,, is,,,a,,,,test";
+char str2[] = "This,, is,,,a,,,,test";
+const char *delim = ",";
+char *result = s21_strtok(str1, delim);
+char *expected = strtok(str2, delim);
+ck_assert_pstr_eq(result, expected);
+while (result != NULL && expected != NULL) {
+  result = s21_strtok(NULL, delim);
+  expected = strtok(NULL, delim);
+  ck_assert_pstr_eq(result, expected);
+}
+
+#test s21_strtok_test5
+char str1[] = "This is a test";
+char str2[] = "This is a test";
+const char *delim = ",";
+char *result = s21_strtok(str1, delim);
+char *expected = strtok(str2, delim);
+ck_assert_pstr_eq(result, expected);
+while (result != NULL && expected != NULL) {
+  result = s21_strtok(NULL, delim);
+  expected = strtok(NULL, delim);
+  ck_assert_pstr_eq(result, expected);
+}
+
+#test s21_strtok_test6
+char str1[] = "T.hi s,, is,,,a,,,t.est.";
+char str2[] = "T.hi s,, is,,,a,,,t.est.";
+const char *delim = ", .";
+char *result = s21_strtok(str1, delim);
+char *expected = strtok(str2, delim);
+ck_assert_pstr_eq(result, expected);
+while (result != NULL && expected != NULL) {
+  result = s21_strtok(NULL, delim);
+  expected = strtok(NULL, delim);
+  ck_assert_pstr_eq(result, expected);
+}

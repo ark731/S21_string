@@ -1,0 +1,36 @@
+#suite s21_strpbrk_test
+
+#test s21_strpbrk_test1
+const char *str = "Hello, brave new world!";
+const char *accept = "aiou";
+char *result = s21_strpbrk(str, accept);
+char *expected = strpbrk(str, accept);
+ck_assert_ptr_eq(result, expected);
+
+#test s21_strpbrk_test2
+const char *accept = "z";
+const char *str = "Hello, brave new world!";
+char *result = s21_strpbrk(str, accept);
+char *expected = strpbrk(str, accept);
+ck_assert_ptr_eq(result, expected);
+
+#test s21_strpbrk_test3
+const char *accept = " ";
+const char *str = "Hello, brave new world!";
+char *result = s21_strpbrk(str, accept);
+char *expected = strpbrk(str, accept);
+ck_assert_ptr_eq(result, expected);
+
+#test s21_strpbrk_test4
+const char *accept = "1234567890";
+const char *str = "Hello, brave new world!";
+char *result = s21_strpbrk(str, accept);
+char *expected = strpbrk(str, accept);
+ck_assert_ptr_eq(result, expected);
+
+#test s21_strpbrk_test5
+const char *accept = "?*!";
+const char *str = "Hello, brave new world!";
+char *result = s21_strpbrk(str, accept);
+char *expected = strpbrk(str, accept);
+ck_assert_ptr_eq(result, expected);

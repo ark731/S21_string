@@ -1,0 +1,27 @@
+#suite s21_strlen_test
+
+#test s21_strlen_test1
+const char *strl = "Hello, world!";
+s21_size_t result = s21_strlen(strl);
+size_t expected = strlen(strl);
+ck_assert_int_eq(result, expected);
+
+#test s21_strlen_test2
+const char *strl = "";
+s21_size_t result = s21_strlen(strl);
+size_t expected = strlen(strl);
+ck_assert_int_eq(result, expected);
+
+#test s21_strlen_test3
+const char *strl =
+    "What you are referring to as Linux is in fact GNU/Linux or as recently i "
+    "have taken to calling - GNU+Linux.";
+s21_size_t result = s21_strlen(strl);
+size_t expected = strlen(strl);
+ck_assert_int_eq(result, expected);
+
+#test s21_strlen_test4
+const char *strl = "00";
+s21_size_t result = s21_strlen(strl);
+size_t expected = strlen(strl);
+ck_assert_int_eq(result, expected);

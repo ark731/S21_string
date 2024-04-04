@@ -1,0 +1,24 @@
+#suite s21_strncat_test
+
+#test s21_strncat_test1
+char result[20] = "Hello, ";
+char expected[20] = "Hello, ";
+const char *src = "World!";
+s21_strncat(result, src, 3);
+strncat(expected, src, 3);
+ck_assert_str_eq(result, expected);
+
+#test s21_strncat_test2
+char empty_result[20] = "";
+char empty_expected[20] = "";
+const char *message = "This is a long message";
+s21_strncat(empty_result, message, 10);
+strncat(empty_expected, message, 10);
+ck_assert_str_eq(empty_result, empty_expected);
+
+#test s21_strncat_test3
+char result[20] = "Hello, ";
+char expected[20] = "Hello, ";
+s21_strncat(result, "", 5);
+strncat(expected, "", 5);
+ck_assert_str_eq(result, expected);

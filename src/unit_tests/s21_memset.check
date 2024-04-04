@@ -1,0 +1,43 @@
+#suite s21_memset_test
+
+#test s21_memset_test1
+char result[] = "Hello, World!";
+char result_orig[] = "Hello, World!";
+int ch = ' ';
+size_t n = strlen(result);
+ck_assert_str_eq(memset(result, ch, n), s21_memset(result_orig, ch, n));
+
+#test s21_memset_test2
+char result[] = "Hello";
+char result_orig[] = "Hello";
+int ch = '\0';
+size_t n = 4;
+ck_assert_str_eq(memset(result, ch, n), s21_memset(result_orig, ch, n));
+
+#test s21_memset_test3
+char result[] = "Hello, World!";
+char result_orig[] = "Hello, World!";
+int ch = ' ';
+size_t n = 5;
+ck_assert_str_eq(memset(result, ch, n), s21_memset(result_orig, ch, n));
+
+#test s21_memset_test4
+char result[] = "Hello, World!";
+char result_orig[] = "Hello, World!";
+int ch = ' ';
+size_t n = 0;
+ck_assert_str_eq(memset(result, ch, n), s21_memset(result_orig, ch, n));
+
+#test s21_memset_test5
+char result[] = "";
+char result_orig[] = "";
+int ch = '\0';
+size_t n = 0;
+ck_assert_str_eq(memset(result, ch, n), s21_memset(result_orig, ch, n));
+
+#test s21_memset_test6
+char result[] = "Hello";
+char result_orig[] = "Hello";
+int ch = '\0';
+size_t n = 4;
+ck_assert_str_eq(memset(result, ch, n), s21_memset(result_orig, ch, n));

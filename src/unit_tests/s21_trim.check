@@ -1,0 +1,70 @@
+#suite s21_trim_test
+
+#test s21_trim_test1
+char str1[36] = "__Hello, world!__";
+char *trim1 = "_";
+char *dest = s21_trim(str1, trim1);
+ck_assert_str_eq(dest, "Hello, world!");
+free(dest);
+
+#test s21_trim_test2
+char str2[53] = "\tHello, world! ";
+char *dest2 = s21_trim(str2, "");
+ck_assert_str_eq(dest2, "Hello, world!");
+free(dest2);
+
+#test s21_trim_test3
+const char *original = "   Hello, world!   ";
+const char *trimmed_chars = " ";
+char *expected = "Hello, world!";
+char *result = s21_trim(original, trimmed_chars);
+ck_assert_str_eq(result, expected);
+free(result);
+
+#test s21_trim_test4
+const char *original = "###Hello, world!###";
+const char *trimmed_chars = "#! ";
+char *expected = "Hello, world";
+char *result = s21_trim(original, trimmed_chars);
+ck_assert_str_eq(result, expected);
+free(result);
+
+#test s21_trim_test5
+const char *original = ",,,Hello, world!!!,,,";
+const char *trimmed_chars = ",";
+char *expected = "Hello, world!!!";
+char *result = s21_trim(original, trimmed_chars);
+ck_assert_str_eq(result, expected);
+free(result);
+
+#test s21_trim_test6
+const char *original = "123Hello, world!456";
+const char *trimmed_chars = "123456";
+char *expected = "Hello, world!";
+char *result = s21_trim(original, trimmed_chars);
+ck_assert_str_eq(result, expected);
+free(result);
+
+#test s21_trim_test7
+const char *original = "Hello, world!";
+const char *trimmed_chars = "xyz";
+char *expected = "Hello, world!";
+char *result = s21_trim(original, trimmed_chars);
+ck_assert_str_eq(result, expected);
+free(result);
+
+#test s21_trim_test8
+const char *trimmed_chars = "xyz";
+char *result = s21_trim(NULL, trimmed_chars);
+ck_assert_pstr_eq(result, NULL);
+
+#test s21_trim_test9
+const char *original = " \t  Hello, world! \n  ";
+char *expected = "Hello, world!";
+char *result = s21_trim(original, NULL);
+ck_assert_str_eq(result, expected);
+free(result);
+
+#test s21_trim_test10
+char *result = s21_trim(NULL, NULL);
+ck_assert_pstr_eq(result, NULL);

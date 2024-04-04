@@ -1,0 +1,42 @@
+#suite s21_strncpy_test
+
+#test s21_strncpy_test1
+char result[20] = "Hello, world!";
+char expected[20] = "Hello, world!";
+char src[] = "Nice";
+s21_size_t n = 5;
+s21_strncpy(result, src, n);
+strncpy(expected, src, n);
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strncpy_test2
+char empty_result[80] = "";
+char empty_expected[80] = "";
+const char *message = "String longer than length to copy";
+s21_strncpy(empty_result, message, 10);
+strncpy(empty_expected, message, 10);
+ck_assert_str_eq(empty_result, empty_expected);
+
+#test s21_strncpy_test3
+char long_src[] = "Testtext";
+char long_result[50];
+char long_expected[50];
+s21_strncpy(long_result, long_src, 20);
+strncpy(long_expected, long_src, 20);
+ck_assert_str_eq(long_result, long_expected);
+
+#test s21_strncpy_test4
+char result[20];
+char expected[20];
+const char *src = "Hello, World!";
+s21_strncpy(result, src, 20);
+strncpy(expected, src, 20);
+ck_assert_str_eq(result, expected);
+
+#test s21_strncpy_test5
+char extended_result[50];
+char extended_expected[50];
+const char *src = "Hello, World!";
+s21_strncpy(extended_result, src, 50);
+strncpy(extended_expected, src, 50);
+ck_assert_str_eq(extended_result, extended_expected);

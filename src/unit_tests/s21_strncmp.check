@@ -1,0 +1,55 @@
+#suite s21_strncmp_test
+
+#test s21_strncmp_test1
+const char *str1 = "I'd like to interject for a moment.";
+const char *str2 = "What you are referring to as Linux is in fact GNU/Linux";
+s21_size_t n = 10;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_strncmp_test2
+const char *str1 = "I'd like to interject for a moment.";
+const char *str2 = "";
+s21_size_t n = 5;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_strncmp_test3
+const char *str1 = "What you are referring to";
+const char *str2 = "What you are referring to as Linux is in fact GNU/Linux";
+s21_size_t n = 4;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_strncmp_test4
+const char *str1 = "What you are referring to";
+const char *str2 = "wWhat you are referring to";
+s21_size_t n = 0;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_strncmp_test5
+const char *str1 = "";
+const char *str2 = "What you are referring to as Linux is in fact GNU/Linux";
+s21_size_t n = 0;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));
+
+#test s21_strncmp_test6
+const char *str1 = ".";
+const char *str2 = "What you are referring to as Linux is in fact GNU/Linux";
+s21_size_t n = 1;
+int result = s21_strncmp(str1, str2, n);
+int expected = strncmp(str1, str2, n);
+ck_assert((result < 0 && expected < 0) || (result > 0 && expected > 0) ||
+          (!result && !expected));

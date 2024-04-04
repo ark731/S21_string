@@ -1,0 +1,36 @@
+#suite s21_strcspn_test
+
+#test s21_strcspn_test1
+const char *str = "Hello, world!";
+const char *reject = "Detox";
+s21_size_t result = s21_strcspn(str, reject);
+s21_size_t expected = strcspn(str, reject);
+ck_assert_int_eq(result, expected);
+
+#test s21_strcspn_test2
+const char *str = "abcdefghijk";
+const char *reject = "abcde";
+s21_size_t result = s21_strcspn(str, reject);
+s21_size_t expected = strcspn(str, reject);
+ck_assert_int_eq(result, expected);
+
+#test s21_strcspn_test3
+const char *str = "";
+const char *reject = "test";
+s21_size_t result = s21_strcspn(str, reject);
+s21_size_t expected = strcspn(str, reject);
+ck_assert_int_eq(result, expected);
+
+#test s21_strcspn_test4
+const char *str = "test";
+const char *reject = "";
+s21_size_t result = s21_strcspn(str, reject);
+s21_size_t expected = strcspn(str, reject);
+ck_assert_int_eq(result, expected);
+
+#test s21_strcspn_test5
+const char *str = "";
+const char *reject = "";
+s21_size_t result = s21_strcspn(str, reject);
+s21_size_t expected = strcspn(str, reject);
+ck_assert_int_eq(result, expected);

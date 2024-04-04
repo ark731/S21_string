@@ -1,0 +1,42 @@
+#suite s21_memcpy_test
+
+#test s21_memcpy_test1
+const char original[] = "Hello, World!";
+char result_orig[15];
+char result[15];
+memcpy(result_orig, original, sizeof(original));
+s21_memcpy(result, original, sizeof(original));
+ck_assert_mem_eq(result_orig, result, sizeof(original));
+
+#test s21_memcpy_test2
+const size_t size = 10000;
+char *original_large = malloc(size);
+char *result_orig_large = malloc(size);
+char *result_large = malloc(size);
+for (size_t i = 0; i < size; i++) {
+  original_large[i] = (char)(i % 256);
+}
+memcpy(result_orig_large, original_large, size);
+s21_memcpy(result_large, original_large, size);
+ck_assert_mem_eq(result_orig_large, result_large, size);
+free(original_large);
+free(result_orig_large);
+free(result_large);
+
+#test s21_memcpy_test3
+char result_orig_n[15];
+char result_n[15];
+char *empty_string = NULL;
+size_t length = empty_string ? strlen(empty_string) : 0;
+memcpy(result_orig_n, empty_string, length);
+s21_memcpy(result_n, empty_string, length);
+ck_assert_mem_eq(result_orig_n, result_n, length);
+
+#test s21_memcpy_test4
+char original[] = "Hello, World!";
+char result[15] = {0};
+char result_orig[15] = {0};
+size_t length = strlen(original);
+s21_memcpy(result, original, length + 1);
+memcpy(result_orig, original, length + 1);
+ck_assert_str_eq(result_orig, result);

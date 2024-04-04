@@ -1,0 +1,73 @@
+#suite s21_no_valgrind_test
+
+#test s21_no_valgrind_test1
+char buffer_1[300], buffer_2[300];
+float float_1 = 3.1415, float_2 = 0.0, float_3 = -0.0099, float_4 = 1.234E18;
+char *format =
+    "float_1 = %.*f, float_2 = %.*f, float_3 = %f, float_4 = %.0f, inf = %+e, "
+    "-INF = %e, #0 = %#.0f";
+sprintf(buffer_1, format, -5, float_1, 8, float_2, float_3, float_4,
+        (float)(__DBL_MAX__ / __DBL_MIN__), (float)(-__DBL_MAX__ / __DBL_MIN__),
+        0.0);
+s21_sprintf(buffer_2, format, -5, float_1, 8, float_2, float_3, float_4,
+            (float)(__DBL_MAX__ / __DBL_MIN__),
+            (float)(-__DBL_MAX__ / __DBL_MIN__), 0.0);
+ck_assert_str_eq(buffer_1, buffer_2);
+
+#test s21_no_valgrind_test2
+char buffer_1[1000], buffer_2[1000];
+double double_1 = 2.31415926, double_2 = 0.0, double_3 = -1.234E-100,
+       double_4 = 9.9999999999E128, double_5 = 999.999;
+char *format =
+    "double_1 = %lf, double_2 = %lf, double_3 = %lf, double_4 = %lg, nan = %e, "
+    "%%#.0G = %#.0lG, double_2 = %#lg, double_5 = %.0lg";
+sprintf(buffer_1, format, double_1, double_2, double_3, double_4, sqrt(-5.),
+        double_1, double_2, double_5);
+s21_sprintf(buffer_2, format, double_1, double_2, double_3, double_4, sqrt(-5.),
+            double_1, double_2, double_5);
+ck_assert_str_eq(buffer_1, buffer_2);
+
+#test s21_no_valgrind_test3
+char buffer_1[3000], buffer_2[3000];
+long double ldbl_1 = 1.23456789012345L, ldbl_2 = 0.0L,
+            ldbl_3 = -3.1415926E-1000L, ldbl_4 = 3.1415926E+2500L,
+            ldbl_5 = 100000.;
+char *format =
+    "ldbl_1 = %.3Lf, ldbl_2 = %Lf, ldbl_3 = %Le, ldbl_4 = %#LG, ldbl_4 = %LE, "
+    "%%.0Le = %.0Le, ldbl_5 = %g";
+sprintf(buffer_1, format, ldbl_1, ldbl_2, ldbl_3, ldbl_4, ldbl_4, ldbl_1,
+        ldbl_5);
+s21_sprintf(buffer_2, format, ldbl_1, ldbl_2, ldbl_3, ldbl_4, ldbl_4, ldbl_1,
+            ldbl_5);
+ck_assert_str_eq(buffer_1, buffer_2);
+
+#test s21_no_valgrind_test4
+char s21_buffer2[256] = {0};
+char buffer2[256] = {0};
+s21_sprintf(s21_buffer2, "[%lf][%lf][%lf][%lf][%lf][%lf]", 0.0 / 0.0, 1.0 / 0.0,
+            0.0 / 1.0, -0.0 / 0.0, -1.0 / 0.0, -0.0 / 1.0);
+sprintf(buffer2, "[%lf][%lf][%lf][%lf][%lf][%lf]", 0.0 / 0.0, 1.0 / 0.0,
+        0.0 / 1.0, -0.0 / 0.0, -1.0 / 0.0, -0.0 / 1.0);
+ck_assert_str_eq(s21_buffer2, buffer2);
+
+#test s21_no_valgrind_test5
+char str1[200] = "";
+char str2[200] = "";
+char *str3 = "%f %f %F %F %g %g %G %G %e %e %E %E";
+float f1 = INFINITY;
+float f2 = NAN;
+int res1 = sprintf(str1, str3, f1, f2, f1, f2, f1, f2, f1, f2, f1, f2, f1, f2);
+int res2 =
+    s21_sprintf(str2, str3, f1, f2, f1, f2, f1, f2, f1, f2, f1, f2, f1, f2);
+ck_assert_int_eq(res1, res2);
+ck_assert_pstr_eq(str1, str2);
+
+#test s21_no_valgrind_test6
+char str1[300] = "";
+char str2[300] = "";
+char *str3 = "%#LG %#.0Lg %020LG %020.5Lg %.2Lf %.0Lf %.2Le % .0Le";
+long double f1 = 99999.9999999999L;
+int res1 = sprintf(str1, str3, f1, f1, f1, f1, f1, f1, f1, f1);
+int res2 = s21_sprintf(str2, str3, f1, f1, f1, f1, f1, f1, f1, f1);
+ck_assert_int_eq(res1, res2);
+ck_assert_pstr_eq(str1, str2);

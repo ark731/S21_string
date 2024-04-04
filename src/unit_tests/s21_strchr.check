@@ -1,0 +1,29 @@
+#suite s21_strchr_test
+
+#test s21_strchr_test1
+const char *str1 = "Arrr hello, brave new world!";
+const int c = 'z';
+char *result = s21_strchr(str1, c);
+char *expected = strchr(str1, c);
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strchr_test2
+const char *str3 = "";
+const int c = 'r';
+char *result = s21_strchr(str3, c);
+char *expected = strchr(str3, c);
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strchr_test3
+const char *str4 = "Arrr hello, brave new world!";
+const int c = 'r';
+char *result = s21_strchr(str4, c);
+char *expected = strchr(str4, c);
+ck_assert_pstr_eq(result, expected);
+
+#test s21_strchr_test4
+const char *str2 = "///";
+const int c = ' ';
+char *result = s21_strchr(str2, c);
+char *expected = strchr(str2, c);
+ck_assert_pstr_eq(result, expected);

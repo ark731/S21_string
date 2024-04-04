@@ -1,0 +1,78 @@
+#suite s21_to_lower_test
+
+#test s21_to_lower_test1
+char str131[23] = "HELLO, WORLD!";
+char expected[23] = "hello, world!";
+char *dest1 = s21_to_lower(str131);
+ck_assert_str_eq(dest1, expected);
+free(dest1);
+
+#test s21_to_lower_test2
+const char *input = "Hello, World!";
+char *result = s21_to_lower(input);
+size_t len = strlen(input) + 1;
+char *expected = malloc(len);
+strcpy(expected, input);
+char *ptr = expected;
+while (*ptr) {
+  *ptr = tolower(*ptr);
+  ptr++;
+}
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_lower_test3
+const char *input2 = "";
+char *result = s21_to_lower(input2);
+size_t len = strlen(input2) + 1;
+char *expected = malloc(len);
+strcpy(expected, input2);
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_lower_test4
+const char *input3 = "hello, world!";
+char *result = s21_to_lower(input3);
+size_t len = strlen(input3) + 1;
+char *expected = malloc(len);
+strcpy(expected, input3);
+char *ptr = expected;
+while (*ptr) {
+  *ptr = tolower(*ptr);
+  ptr++;
+}
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_lower_test5
+const char *input4 = "HELLO, WORLD!";
+char *result = s21_to_lower(input4);
+size_t len = strlen(input4) + 1;
+char *expected = malloc(len);
+strcpy(expected, input4);
+char *ptr = expected;
+while (*ptr) {
+  *ptr = tolower(*ptr);
+  ptr++;
+}
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);
+
+#test s21_to_lower_test6
+const char *input5 = "HeLlO, WoRlD!";
+char *result = s21_to_lower(input5);
+size_t len = strlen(input5) + 1;
+char *expected = malloc(len);
+strcpy(expected, input5);
+char *ptr = expected;
+while (*ptr) {
+  *ptr = tolower(*ptr);
+  ptr++;
+}
+ck_assert_str_eq(result, expected);
+free(result);
+free(expected);

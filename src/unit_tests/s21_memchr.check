@@ -1,0 +1,50 @@
+#suite s21_memchr_test
+
+#test s21_memchr_test1
+const char str1[] = "Hello, World!";
+const char ch_exist = 'o';
+char *result;
+char *expected;
+result = memchr(str1, ch_exist, sizeof(str1));
+expected = s21_memchr(str1, ch_exist, sizeof(str1));
+ck_assert_ptr_eq(result, expected);
+
+#test s21_memchr_test2
+const char str1[] = "Hello, World!";
+const char ch_not_exist = 'z';
+char *result;
+char *expected;
+result = memchr(str1, ch_not_exist, sizeof(str1));
+expected = s21_memchr(str1, ch_not_exist, sizeof(str1));
+ck_assert_ptr_eq(result, expected);
+
+#test s21_memchr_test3
+const char ch_exist = 'o';
+char *result;
+char *expected;
+result = memchr("", ch_exist, 0);
+expected = s21_memchr("", ch_exist, 0);
+ck_assert_ptr_eq(result, expected);
+
+#test s21_memchr_test4
+const char str1[] = "Hello, World!";
+const char ch_exist = 'o';
+char *result;
+char *expected;
+result = memchr(str1, ch_exist, 5);
+expected = s21_memchr(str1, ch_exist, 5);
+ck_assert_ptr_eq(result, expected);
+
+#test s21_memchr_test5
+const char str2[] =
+    "What you are referring to as Linux is in fact GNU/Linux or as recently i "
+    "have taken to calling - GNU+Linux. Linux is not an operating system unto "
+    "itself but rather another free component of a full functioning GNU system "
+    "made useful by the GNU corelibs, shell utilities and vital system "
+    "components comprising a full OS as defined by POSIX.";
+const char ch_large_string = 'r';
+char *result;
+char *expected;
+result = memchr(str2, ch_large_string, sizeof(str2));
+expected = s21_memchr(str2, ch_large_string, sizeof(str2));
+ck_assert_ptr_eq(result, expected);
